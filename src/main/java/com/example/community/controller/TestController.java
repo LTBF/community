@@ -15,6 +15,6 @@ public class TestController {
     @GetMapping("/test")
     public String test(@RequestParam(name = "name", defaultValue = "default")String name, Model model){
         model.addAttribute("name", name);
-        return "test";
+        return "index";
     }
 }
