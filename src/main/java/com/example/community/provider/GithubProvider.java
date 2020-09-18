@@ -3,10 +3,7 @@ package com.example.community.provider;
 import com.alibaba.fastjson.JSON;
 import com.example.community.dto.AccessTokenDTO;
 import com.example.community.dto.GithubUser;
-<<<<<<< HEAD
-=======
 import org.springframework.beans.factory.annotation.Value;
->>>>>>> immplent github login
 import org.springframework.stereotype.Component;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -24,18 +21,11 @@ import java.rmi.server.RemoteRef;
 @Component
 public class GithubProvider {
 
-<<<<<<< HEAD
-=======
 
->>>>>>> immplent github login
     // post请求access_token
     public String getAccessToken(AccessTokenDTO accessTokenDTO){
 
         MediaType mediaType = MediaType.get("application/json; charset=utf-8");
-<<<<<<< HEAD
-
-=======
->>>>>>> immplent github login
         RequestBody body = RequestBody.create(mediaType, JSON.toJSONString(accessTokenDTO));
         Request request = new Request.Builder()
                 .url("https://github.com/login/oauth/access_token")
@@ -57,17 +47,9 @@ public class GithubProvider {
     // get根据access_token返回用户信息
     public GithubUser getUser(String accessToken){
         OkHttpClient client = new OkHttpClient();
-<<<<<<< HEAD
-
         Request request = new Request.Builder()
                 .url("https://api.github.com/user?access_token=" + accessToken)
                 .build();
-
-=======
-        Request request = new Request.Builder()
-                .url("https://api.github.com/user?access_token=" + accessToken)
-                .build();
->>>>>>> immplent github login
         try {
             Response response = client.newCall(request).execute();
             String str = response.body().string();
