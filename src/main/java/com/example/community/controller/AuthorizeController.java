@@ -12,7 +12,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
 import java.util.UUID;
 
@@ -41,7 +43,7 @@ public class AuthorizeController {
     @GetMapping("/callback")
     public String callback(@RequestParam(name="code")String code,
                            @RequestParam(name="state")String state,
-                           HttpServletRequest request){
+                           HttpServletResponse response){
         AccessTokenDTO accessTokenDTO = new AccessTokenDTO();
         accessTokenDTO.setClient_id(client_id);
         accessTokenDTO.setClient_secret(client_secret);
@@ -51,7 +53,7 @@ public class AuthorizeController {
         GithubUser githubUser = githubProvider.getUser(accessToken);
 
         if(githubUser != null){
-            request.getSession().setAttribute("user", githubUser);
+            // 用户token写入数据库（换浏览器登录时，会重新插入一条token）
             User user = new User();
             user.setAccount(String.valueOf(githubUser.getId()));
             user.setName(githubUser.getName());
@@ -59,6 +61,8 @@ public class AuthorizeController {
             user.setCreateTime(new Date());
             user.setUpdateTime(user.getCreateTime());
             userMapper.insertUser(user);
+            // 写回cookie
+            response.addCookie(new Cookie("token", user.getToken()));
         }
 
         return "redirect:/";
