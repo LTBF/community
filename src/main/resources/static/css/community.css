@@ -1,0 +1,28 @@
+body{
+    background-color: #efefef;
+}
+
+.textarea{
+    background-color: white;
+    margin-top: 30px;
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+.buttonright{
+    margin-top: 15px;
+    margin-bottom: 15px;
+    margin-right: 20px;
+    float:right;
+}
+.imglogo{
+    width: 50px;
+    height: 40px;
+}
+.text_desc{
+    font-size: 12px;
+    font-weight: normal;
+    color: #999;
+}
+
+
