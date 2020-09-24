@@ -6,6 +6,8 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
+import java.util.List;
+
 /**
  * @author shkstart
  * @create 2020-09-18 22:48
@@ -21,5 +23,5 @@ public interface UserMapper {
     User selectByToken(@Param("token") String value);
 
     @Select("select * from user where account=#{account}")
-    User selectByCreator(@Param("account") String account);
+    List<User> selectByCreator(@Param("account") String account);
 }

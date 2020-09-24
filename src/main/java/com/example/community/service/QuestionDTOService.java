@@ -34,8 +34,8 @@ public class QuestionDTOService {
         for (Question question : questionList) {
             QuestionDTO questionDTO = new QuestionDTO();
             BeanUtils.copyProperties(question, questionDTO);
-            User user = userMapper.selectByCreator(question.getAccount());
-            questionDTO.setUser(user);
+            List<User> userList = userMapper.selectByCreator(question.getAccount());
+            questionDTO.setUser(userList.get(0));
             questionDTOList.add(questionDTO);
         }
 
