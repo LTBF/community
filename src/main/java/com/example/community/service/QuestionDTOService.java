@@ -26,9 +26,9 @@ public class QuestionDTOService {
     private UserMapper userMapper;
 
 
-    public List<QuestionDTO> list() {
+    public List<QuestionDTO> list(Integer offset, Integer num) {
 
-        List<Question> questionList = questionMapper.list();
+        List<Question> questionList = questionMapper.list(offset, num);
         List<QuestionDTO> questionDTOList = new ArrayList<>();
 
         for (Question question : questionList) {

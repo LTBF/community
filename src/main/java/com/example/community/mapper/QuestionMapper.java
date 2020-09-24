@@ -3,6 +3,7 @@ package com.example.community.mapper;
 import com.example.community.model.Question;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
@@ -18,6 +19,9 @@ public interface QuestionMapper {
             " values(#{title}, #{text}, #{account}, #{commentCount}, #{viewCount}, #{likeCount}, #{createTime}, #{updateTime})")
     void insertQuestion(Question question);
 
-    @Select("select * from question")
-    List<Question> list();
+    @Select("select * from question limit #{offset},#{num}")
+    List<Question> list(@Param("offset") Integer offset, @Param("num") Integer num);
+
+    @Select("select count(1) from question")
+    int count();
 }
